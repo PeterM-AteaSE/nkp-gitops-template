@@ -1,0 +1,18 @@
+apiVersion: external-secrets.io/v1
+kind: SecretStore
+metadata:
+  name: eso-store-platform
+  namespace: platform-netscaler
+spec:
+  provider:
+    azurekv:
+      tenantId: "<AZURE_TENANT_ID>"
+      vaultUrl: "https://<AZURE_KEY_VAULT_NAME>.vault.azure.net/"
+      authType: "ServicePrincipal"
+      authSecretRef:
+        clientId:
+          name: eso-azure-auth
+          key: clientId
+        clientSecret:
+          name: eso-azure-auth
+          key: clientSecret

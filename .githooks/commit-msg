@@ -1,0 +1,36 @@
+#!/bin/bash
+
+## the first arg is the path to the git commit temporary file
+TEMPORARY_FILE_PATH=$1
+
+## get commit-message from the temporary file
+COMMIT_MSG=$(head -n1 "$TEMPORARY_FILE_PATH")
+
+## init regex to match commit-message format
+REGEX="^[a-zA-Z]+\(.+\): [^ ].*$"
+
+## checking commit-message format
+if ! [[ $COMMIT_MSG =~ $REGEX ]]; then
+	echo -e "\033[0;31m❌ COMMIT MESSAGE FORMAT ERROR\033[0m"
+	echo -e "\nYour message: \033[0;33m$COMMIT_MSG\033[0m\n"
+	echo -e "\033[0;32m✓ Required format:\033[0m type(scope): description"
+	echo ""
+	echo "Valid types: feat, fix, chore, docs, style, refactor, test, build, ci"
+	echo "Valid scopes: argocd, cert-manager, deploy, eso, externaldns, netscaler,"
+	echo "              ollama, open-webui, olmv0, adcs-issuer, multiple, docs, etc."
+	echo ""
+	echo -e "\033[0;32m✓ Valid examples:\033[0m"
+	echo "  feat(argocd): add operator-based deployment"
+	echo "  fix(deploy): correct namespace creation logic"
+	echo "  chore(multiple): update ALLOW_LIST configurations"
+	echo "  docs(readme): add deployment instructions"
+	echo ""
+	echo -e "\033[0;33m⚠ Common mistakes:\033[0m"
+	echo "  ❌ feat: missing scope"
+	echo "  ❌ feat(deploy) missing colon"
+	echo "  ❌ feat(deploy):  extra space after colon"
+	echo "  ❌ feat(deploy): Description with capital D"
+	echo ""
+	echo -e "\033[0;36mTip:\033[0m Edit your commit message to match the format above"
+	exit 1
+fi

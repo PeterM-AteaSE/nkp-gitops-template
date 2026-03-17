@@ -1,0 +1,23 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: #@ data.values.name + "-all-apps"
+  namespace: platform-argocd
+  labels:
+    app: "cluster-all-apps"
+spec:
+  destination:
+    name: #@ data.values.name
+    namespace: platform-argocd
+  project: platform
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: #@ "deployments/" + data.values.name + "/argocd-apps"
+    repoURL: ssh://git@github.com:<GITHUB_ORG>/<GITHUB_REPO>.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}

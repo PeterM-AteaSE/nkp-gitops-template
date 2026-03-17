@@ -1,0 +1,47 @@
+---
+# ArgoCD AppProject for Platform Infrastructure
+# This project defines RBAC and allowed resources for platform services
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: platform-argocd
+spec:
+  description: Platform infrastructure components (cert-manager, ESO, ingress, DNS, etc.)
+  
+  # Source repositories
+  sourceRepos:
+    - 'ssh://git@github.com:<GITHUB_ORG>/<GITHUB_REPO>.git'
+  
+  # Destination clusters and namespaces
+  destinations:
+    # Allow deployment to any namespace in registered clusters
+    - namespace: 'platform-*'
+      server: '*'
+  
+  # Cluster resource allow list
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  # Namespace resource whitelist (empty = allow all)
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  # Roles for user/group access
+  roles:
+    # Platform administrators - full access
+    - name: platform-admin
+      description: Full access to platform project applications
+      policies:
+        - p, proj:platform:platform-admin, applications, *, platform/*, allow
+        - p, proj:platform:platform-admin, repositories, get, platform/*, allow
+        - p, proj:platform:platform-admin, logs, *, platform/*, allow
+        - p, proj:platform:platform-admin, exec, *, platform/*, allow
+      groups:
+        - platform-admins
+    
+  # Orphaned resources handling
+  orphanedResources:
+    warn: true

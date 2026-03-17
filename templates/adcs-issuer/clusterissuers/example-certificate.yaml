@@ -1,0 +1,42 @@
+# Example Certificate using the ClusterAdcsIssuer
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-adcs-certificate
+  namespace: default
+spec:
+  # Secret where the certificate will be stored
+  secretName: example-tls-secret
+  
+  # Certificate duration (default: 90 days)
+  duration: 2160h # 90 days
+  
+  # Renew certificate 30 days before expiration
+  renewBefore: 720h # 30 days
+  
+  # Common Name
+  commonName: app.example.com
+  
+  # Subject Alternative Names
+  dnsNames:
+    - app.example.com
+    - www.app.example.com
+  
+  # Reference to the ClusterAdcsIssuer
+  issuerRef:
+    name: hbg-adcs-issuer
+    kind: ClusterAdcsIssuer
+    group: adcs.certmanager.csf.nokia.com
+  
+  # Subject details
+  subject:
+    organizations:
+      - "Your Organization"
+    organizationalUnits:
+      - "IT Department"
+  
+  # Private key configuration
+  privateKey:
+    algorithm: RSA
+    size: 2048

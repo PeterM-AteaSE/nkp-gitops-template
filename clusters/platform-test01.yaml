@@ -1,0 +1,33 @@
+#@data/values
+---
+#! Cluster Name
+name: platform-test01
+#! Cluster type
+env: test
+
+#! Citrix Ingress Controller Config
+cic:
+  #! Administrative address (nitro-api)
+  nsIP: <NETSCALER_NSIP>
+  #! Default CS IP in Netscaler for LAN services
+  nsVIP: <CLUSTER_TEST_NSVIP>
+  #! Default CS IP in Netscaler for public services
+  nsInternetVIP: <CLUSTER_TEST_INTERNET_VIP>
+  #! Local subnet address for Netscaler for this cluster
+  #! Used for setting Policy Based Routes
+  nsSNIPS: <CLUSTER_TEST_SNIP>
+
+argocd:
+  server:
+    replicas: 2
+    serverUrl: "argocd-test.k8s.<CUSTOMER_K8S_DOMAIN>"
+    grpcUrl: "argocd-test-grpc.k8s.<CUSTOMER_K8S_DOMAIN>"
+  controller:
+    sharding: false
+    replicas: 2
+
+adcs:
+  url: "https://<CUSTOMER_ADCS_HOSTNAME>/certsrv"
+  templateName: "WebServer"
+  statusCheckInterval: "6h"
+  retryInterval: "1h"

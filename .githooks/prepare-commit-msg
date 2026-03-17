@@ -1,0 +1,64 @@
+#!/bin/bash
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+# Only process if this is a new commit (not amend, merge, etc.)
+if [ -z "$COMMIT_SOURCE" ] || [ "$COMMIT_SOURCE" = "message" ]; then
+    ORIGINAL_MSG=$(cat "$COMMIT_MSG_FILE")
+    
+    # Skip if message already matches the required format
+    if [[ "$ORIGINAL_MSG" =~ ^[a-zA-Z]+\(.+\):\ [^\ ].* ]]; then
+        exit 0
+    fi
+    
+    # Skip if message is empty or just comments
+    if [[ -z "$ORIGINAL_MSG" ]] || [[ "$ORIGINAL_MSG" =~ ^# ]]; then
+        exit 0
+    fi
+    
+    # Try to auto-format common AI-generated patterns
+    # Pattern: "Verb something..." -> "chore(multiple): verb something..."
+    if [[ "$ORIGINAL_MSG" =~ ^[A-Z][a-z]+\ .+ ]]; then
+        # Convert first word to lowercase
+        FORMATTED_MSG=$(echo "$ORIGINAL_MSG" | sed 's/^\([A-Z]\)/\L\1/')
+        
+        # Determine scope based on changed files
+        SCOPE="multiple"
+        if git diff --cached --name-only | grep -q "templates/argocd"; then
+            SCOPE="argocd"
+        elif git diff --cached --name-only | grep -q "templates/cert-manager"; then
+            SCOPE="cert-manager"
+        elif git diff --cached --name-only | grep -q "templates/external-secrets"; then
+            SCOPE="eso"
+        elif git diff --cached --name-only | grep -q "deploy-cluster.sh"; then
+            SCOPE="deploy"
+        elif git diff --cached --name-only | grep -q "README\|\.md$"; then
+            SCOPE="docs"
+        elif git diff --cached --name-only | grep -q "templates/ollama"; then
+            SCOPE="ollama"
+        elif git diff --cached --name-only | grep -q "templates/open-webui"; then
+            SCOPE="open-webui"
+        fi
+        
+        # Determine type based on keywords
+        TYPE="chore"
+        if echo "$ORIGINAL_MSG" | grep -iq "add\|implement\|feature\|new"; then
+            TYPE="feat"
+        elif echo "$ORIGINAL_MSG" | grep -iq "fix\|correct\|resolve\|bug"; then
+            TYPE="fix"
+        elif echo "$ORIGINAL_MSG" | grep -iq "refactor\|restructure\|reorganize"; then
+            TYPE="refactor"
+        elif echo "$ORIGINAL_MSG" | grep -iq "update.*doc\|document"; then
+            TYPE="docs"
+        fi
+        
+        # Write formatted message
+        echo "$TYPE($SCOPE): $FORMATTED_MSG" > "$COMMIT_MSG_FILE"
+        echo "" >> "$COMMIT_MSG_FILE"
+        echo "# Auto-formatted from: $ORIGINAL_MSG" >> "$COMMIT_MSG_FILE"
+        echo "# Edit above to match your changes if needed" >> "$COMMIT_MSG_FILE"
+    fi
+fi
+
+exit 0

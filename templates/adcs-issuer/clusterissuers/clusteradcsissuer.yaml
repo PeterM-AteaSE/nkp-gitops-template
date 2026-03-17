@@ -1,0 +1,13 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: adcs.certmanager.csf.nokia.com/v1
+kind: ClusterAdcsIssuer
+metadata:
+  name: hbg-adcs-issuer
+spec:
+  url: #@ data.values.adcs.url
+  credentialsRef:
+    name: adcs-credentials
+  statusCheckInterval: #@ data.values.adcs.statusCheckInterval
+  retryInterval: #@ data.values.adcs.retryInterval
+  templateName: #@ data.values.adcs.templateName

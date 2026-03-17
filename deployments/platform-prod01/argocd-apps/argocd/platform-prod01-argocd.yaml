@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-prod01-argocd
+  namespace: platform-argocd
+  labels:
+    app: argocd
+spec:
+  destination:
+    name: platform-prod01
+    namespace: platform-argocd
+  project: platform
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: deployments/platform-prod01/argocd
+    repoURL: ssh://git@github.com:<GITHUB_ORG>/<GITHUB_REPO>.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}

@@ -1,0 +1,26 @@
+type(scope): brief description of changes
+
+# REQUIRED FORMAT: type(scope): description
+# 
+# Types: feat, fix, chore, docs, style, refactor, test, build, ci
+# Scopes: argocd, cert-manager, clusters, deploy, eso, externaldns, netscaler, 
+#         ollama, open-webui, olmv0, adcs-issuer, setup, utils, docs, multiple
+# 
+# Rules:
+# - First line: type(scope): description (max 72 chars)
+# - Type must be one of the allowed types above
+# - Scope is required and must be in parentheses
+# - Colon and space after closing parenthesis
+# - Description must not start with a space or capital letter
+# 
+# Valid examples:
+# feat(argocd): add operator-based deployment
+# fix(deploy): correct namespace creation logic
+# chore(multiple): update ALLOW_LIST configurations
+# docs(readme): add deployment instructions
+#
+# Invalid examples:
+# feat: missing scope - INVALID
+# feat(argocd) missing colon - INVALID  
+# feat(argocd):  extra space after colon - INVALID
+# feat(argocd): Description starts with capital - INVALID

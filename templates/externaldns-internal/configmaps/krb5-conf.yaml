@@ -1,0 +1,46 @@
+---
+# Kerberos configuration for external-dns RFC2136 with GSS-TSIG
+# 
+# Replace the following placeholders:
+# - YOUR-REALM.COM: Your Kerberos realm (usually uppercase domain name, e.g., YOURDOMAIN.COM)
+# - dc1.yourdomain.com: Your domain controller/KDC hostname
+# - yourdomain.com: Your Active Directory domain name
+#
+# This ConfigMap is mounted at /etc/krb5.conf in the external-dns container
+# and is required for Kerberos authentication to work with Microsoft DNS.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: krb5-conf
+  namespace: platform-externaldns
+data:
+  krb5.conf: |
+    [logging]
+    default = FILE:/var/log/krb5libs.log
+    kdc = FILE:/var/log/krb5kdc.log
+    admin_server = FILE:/var/log/kadmind.log
+
+    [libdefaults]
+    dns_lookup_realm = false
+    ticket_lifetime = 24h
+    renew_lifetime = 7d
+    forwardable = true
+    rdns = false
+    pkinit_anchors = /etc/pki/tls/certs/ca-bundle.crt
+    default_ccache_name = KEYRING:persistent:%{uid}
+    
+
+    default_realm = <CUSTOMER_KERBEROS_REALM>
+
+    [realms]
+    <CUSTOMER_KERBEROS_REALM> = {
+      kdc = <CUSTOMER_AD_KDC>
+      admin_server = <CUSTOMER_AD_KDC>
+    }
+
+    [domain_realm]
+    <CUSTOMER_AD_DOMAIN> = <CUSTOMER_KERBEROS_REALM>
+    .<CUSTOMER_AD_DOMAIN> = <CUSTOMER_KERBEROS_REALM>
+    k8s.<CUSTOMER_DOMAIN> = <CUSTOMER_KERBEROS_REALM>
+    .k8s.<CUSTOMER_DOMAIN> = <CUSTOMER_KERBEROS_REALM>

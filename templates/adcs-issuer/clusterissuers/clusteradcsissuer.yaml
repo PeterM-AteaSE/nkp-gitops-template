@@ -3,7 +3,7 @@
 apiVersion: adcs.certmanager.csf.nokia.com/v1
 kind: ClusterAdcsIssuer
 metadata:
-  name: hbg-adcs-issuer
+  name: <CUSTOMER_SHORT>-adcs-issuer
 spec:
   url: #@ data.values.adcs.url
   credentialsRef:

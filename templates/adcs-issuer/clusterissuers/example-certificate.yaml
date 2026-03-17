@@ -25,7 +25,7 @@ spec:
   
   # Reference to the ClusterAdcsIssuer
   issuerRef:
-    name: hbg-adcs-issuer
+    name: <CUSTOMER_SHORT>-adcs-issuer
     kind: ClusterAdcsIssuer
     group: adcs.certmanager.csf.nokia.com
   

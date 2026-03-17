@@ -46,10 +46,10 @@ rename_if_exists() {
 }
 
 # Perform renames
-rename_if_exists "hbg-platform-prod01-admin@hbg-platform-prod01" "platform-p01"
-rename_if_exists "hbg-platform-test01-admin@hbg-platform-test01" "platform-t01"
-rename_if_exists "hbg-shared-prod01-admin@hbg-shared-prod01" "shared-p01"
-rename_if_exists "hbg-shared-test01-admin@hbg-shared-test01" "shared-t01"
+rename_if_exists "platform-prod01-admin@platform-prod01" "platform-p01"
+rename_if_exists "platform-test01-admin@platform-test01" "platform-t01"
+rename_if_exists "shared-prod01-admin@shared-prod01" "shared-p01"
+rename_if_exists "shared-test01-admin@shared-test01" "shared-t01"
 rename_if_exists "management-admin@management" "nkp-admin"
 
 echo ""

@@ -297,7 +297,7 @@ ingress:
   #   # nginx.ingress.kubernetes.io/rewrite-target: /
   # -- Host for the Ingress record
   # @section -- Ingress configuration
-  host: "hbgpgt.nkp.hbgfab.local" # update to your real domain
+  host: "<CUSTOMER_HOST>.<CUSTOMER_INTERNAL_DOMAIN>" # update to your real domain
   # -- Additional hosts for the Ingress record
   # @section -- Ingress configuration
   additionalHosts: []

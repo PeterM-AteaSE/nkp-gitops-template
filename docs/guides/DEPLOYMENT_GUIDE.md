@@ -1,4 +1,4 @@
-# HBG NKP GitOps Platform Deployment Guide
+# <CUSTOMER_SHORT_UPPER> NKP GitOps Platform Deployment Guide
 
 ## Table of Contents
 - [Automated Deployment](#automated-deployment-recommended)

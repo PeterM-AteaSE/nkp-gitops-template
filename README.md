@@ -1,6 +1,6 @@
-# HBG Nutanix Kubernetes Platform - GitOps
+# <CUSTOMER_SHORT_UPPER> Nutanix Kubernetes Platform - GitOps
 
-This repository manages the infrastructure and configuration for HBG's Nutanix Kubernetes Platform (NKP) clusters using GitOps principles.
+This repository manages the infrastructure and configuration for <CUSTOMER_SHORT_UPPER>'s Nutanix Kubernetes Platform (NKP) clusters using GitOps principles.
 
 ## Overview
 
@@ -73,10 +73,10 @@ For easier cluster management, rename your kubectl contexts to shorter aliases:
 
 This script renames contexts from the default long names to shorter, more convenient aliases:
 
-- `hbg-platform-prod01-admin@hbg-platform-prod01` → `platform-p01`
-- `hbg-platform-test01-admin@hbg-platform-test01` → `platform-t01`
-- `hbg-shared-prod01-admin@hbg-shared-prod01` → `shared-p01`
-- `hbg-shared-test01-admin@hbg-shared-test01` → `shared-t01`
+- `platform-prod01-admin@platform-prod01` → `platform-p01`
+- `platform-test01-admin@platform-test01` → `platform-t01`
+- `shared-prod01-admin@shared-prod01` → `shared-p01`
+- `shared-test01-admin@shared-test01` → `shared-t01`
 - `management-admin@management` → `nkp-admin`
 
 After renaming, you can switch contexts more easily:
@@ -129,7 +129,7 @@ Cluster configurations are stored in the `clusters/` directory. Each cluster has
 Example cluster configuration structure:
 
 ```yaml
-name: hbg-platform-test01
+name: platform-test01
 env: test
 cic:
   nsIP: x.x.x.x          # Netscaler admin address
@@ -349,4 +349,4 @@ To add a new cluster:
 
 ## Support
 
-For issues or questions regarding cluster management, consult the internal HBG Kubernetes platform team.
+For issues or questions regarding cluster management, consult the internal <CUSTOMER_SHORT_UPPER> Kubernetes platform team.

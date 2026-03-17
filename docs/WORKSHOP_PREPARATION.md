@@ -203,6 +203,6 @@ Everything else will be covered during the workshop.
 
 ---
 
-*Helsingborg Stad NKP Platform Team*  
+*<CUSTOMER_FULLNAME> NKP Platform Team*  
 *Updated: 2 March 2026*
 

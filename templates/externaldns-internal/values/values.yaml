@@ -254,7 +254,7 @@ domainFilters:
 excludeDomains: []
 
 # -- Filter resources queried for endpoints by label selector.
-labelFilter: "helsingborg.se/internaldns in (true)" # @schema type: [string,null]; default: null
+labelFilter: "<CUSTOMER_DOMAIN>/internaldns in (true)" # @schema type: [string,null]; default: null
 
 # -- Filter resources queried for endpoints by annotation selector.
 annotationFilter:  # @schema type: [string,null]; default: null

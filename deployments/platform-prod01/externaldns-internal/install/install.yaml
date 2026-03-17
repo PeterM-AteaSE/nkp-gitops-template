@@ -251,7 +251,7 @@ spec:
             - --registry=txt
             - --txt-owner-id=platform-prod01
             - --domain-filter=k8s.<CUSTOMER_DOMAIN>
-            - --label-filter=helsingborg.se/internaldns in (true)
+            - --label-filter=<CUSTOMER_DOMAIN>/internaldns in (true)
             - --provider=rfc2136
             - --rfc2136-gss-tsig
             - --rfc2136-host=<CUSTOMER_AD_KDC>

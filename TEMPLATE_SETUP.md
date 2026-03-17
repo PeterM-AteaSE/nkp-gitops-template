@@ -85,7 +85,7 @@ echo "Done. Review git diff before committing."
 
 | Placeholder | Description | Example |
 |-------------|-------------|---------|
-| `<GITHUB_ORG>` | GitHub organization name | `helsingborg-stad` |
+| `<GITHUB_ORG>` | GitHub organization name | `<CUSTOMER_SHORT>-stad` |
 | `<GITHUB_REPO>` | GitHub repository name | `acme-nkp-gitops` |
 | `<CUSTOMER_FULLNAME>` | Display name used in ArgoCD OIDC | `Acme Corporation` |
 | `<AZURE_TENANT_ID>` | Azure AD Tenant UUID | `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` |

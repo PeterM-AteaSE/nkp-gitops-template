@@ -54,7 +54,7 @@ spec:
                   "issuer": "https://login.microsoftonline.com/<AZURE_TENANT_ID>/v2.0",
                   "clientID": "{{ .clientId }}",
                   "clientSecret": "{{ .clientSecret }}",
-                  "redirectURI": "https://argocd.helsingborg.se/api/dex/callback"
+                  "redirectURI": "https://argocd.<CUSTOMER_DOMAIN>/api/dex/callback"
                 }
               }
             ]
@@ -137,8 +137,8 @@ Value:
     "password": "secret-password"
   },
   "apiEndpoints": {
-    "primary": "https://api.helsingborg.se",
-    "backup": "https://api-backup.helsingborg.se"
+    "primary": "https://api.<CUSTOMER_DOMAIN>",
+    "backup": "https://api-backup.<CUSTOMER_DOMAIN>"
   }
 }
 ```
@@ -177,10 +177,10 @@ spec:
         credentials.json: |
           {
             "type": "service_account",
-            "project_id": "helsingborg-platform",
+            "project_id": "<CUSTOMER_SHORT>-platform",
             "private_key_id": "{{ .privateKeyId }}",
             "private_key": "{{ .privateKey }}",
-            "client_email": "service@helsingborg-platform.iam.gserviceaccount.com",
+            "client_email": "service@<CUSTOMER_SHORT>-platform.iam.gserviceaccount.com",
             "client_id": "{{ .clientId }}",
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
@@ -250,7 +250,7 @@ spec:
               },
               "azure": {
                 "enabled": true,
-                "endpoint": "https://helsingborg-ai.openai.azure.com/",
+                "endpoint": "https://<CUSTOMER_SHORT>-ai.openai.azure.com/",
                 "apiKey": "{{ .azureApiKey }}",
                 "deployment": "gpt-4"
               }
@@ -258,8 +258,8 @@ spec:
             "security": {
               "adminToken": "{{ .adminToken }}",
               "allowedOrigins": [
-                "https://ai.helsingborg.se",
-                "https://chat.helsingborg.se"
+                "https://ai.<CUSTOMER_DOMAIN>",
+                "https://chat.<CUSTOMER_DOMAIN>"
               ]
             }
           }
@@ -317,8 +317,8 @@ spec:
         dns-zones.json: |
           {
             "zones": [
-              "helsingborg.se",
-              "platform.helsingborg.se"
+              "<CUSTOMER_DOMAIN>",
+              "platform.<CUSTOMER_DOMAIN>"
             ],
             "policy": "sync",
             "txtOwnerId": "external-dns-platform"

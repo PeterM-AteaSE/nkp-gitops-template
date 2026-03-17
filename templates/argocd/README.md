@@ -177,7 +177,7 @@ configs:
     url: #@ "https://" + data.values.argocd.server.serverUrl
     oidc.config: |
       name: <CUSTOMER_FULLNAME> IdP
-      issuer: https://idp.helsingborg.se
+      issuer: https://idp.<CUSTOMER_DOMAIN>
       requestedScopes: ["openid", "profile", "email", "groups"]
       clientID: $OIDC_CLIENT_ID
       clientSecret: $OIDC_CLIENT_SECRET

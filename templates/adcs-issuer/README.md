@@ -99,7 +99,7 @@ kubectl wait --for=condition=Ready pod \
 kubectl get crd | grep adcs
 
 # ClusterAdcsIssuer status
-kubectl get clusteradcsissuer hbg-adcs-issuer -o yaml
+kubectl get clusteradcsissuer <CUSTOMER_SHORT>-adcs-issuer -o yaml
 
 # ESO synced the credentials secret
 kubectl get secret adcs-credentials -n platform-adcs-issuer

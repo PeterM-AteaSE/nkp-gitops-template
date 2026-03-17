@@ -7,7 +7,7 @@ ArgoCD provides GitOps continuous delivery for Kubernetes. This guide walks thro
 ## Prerequisites
 
 1. **kubectl** with access to the platform-prod01 cluster
-2. **HBG-NKP-Gitops** git repository cloned locally and updated
+2. **<CUSTOMER_SHORT_UPPER>-NKP-Gitops** git repository cloned locally and updated
 3. **Azure CLI** installed and authenticated (`az login`)
 4. **Access to Azure Key Vault**: `<AZURE_KEY_VAULT_NAME>`
 5. **External Secrets Operator** already deployed (see [ESO.md](ESO.md))

@@ -309,7 +309,7 @@ spec:
           {
             "tenantId": "<AZURE_TENANT_ID>",
             "subscriptionId": "{{ .subscriptionId }}",
-            "resourceGroup": "rg-nkp-platform",
+            "resourceGroup": "rg-<CUSTOMER_SHORT_NAME>-platform",
             "aadClientId": "{{ .clientId }}",
             "aadClientSecret": "{{ .clientSecret }}"
           }

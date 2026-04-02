@@ -1,6 +1,6 @@
-# NKP GitOps — Customer Template
+# ArgoCD GitOps — Customer Template
 
-This repository is a template for deploying the NKP (Nutanix Kubernetes Platform) GitOps stack to a new customer environment. It contains the full structure from a reference implementation with all customer-specific values replaced by placeholders.
+This repository is a template for deploying the ArgoCD GitOps stack to a new customer environment. It contains the full structure from a reference implementation with all customer-specific values replaced by placeholders.
 
 ---
 
@@ -10,9 +10,9 @@ This repository is a template for deploying the NKP (Nutanix Kubernetes Platform
 
 ```bash
 # Clone/copy this template
-cp -r nkp-gitops-template <CUSTOMER_SHORT_NAME>-nkp-gitops
-cd <CUSTOMER_SHORT_NAME>-nkp-gitops
-git init && git add . && git commit -m "chore(init): initial commit from nkp-gitops-template"
+cp -r argocd-gitops-template <CUSTOMER_SHORT_NAME>-argocd-gitops
+cd <CUSTOMER_SHORT_NAME>-argocd-gitops
+git init && git add . && git commit -m "chore(init): initial commit from argocd-gitops-template"
 ```
 
 ### 2. Fill in the placeholders
@@ -23,7 +23,7 @@ Run the helper script below (fill in your values first):
 CUSTOMER_SHORT_NAME="acme"                    # e.g. "acme" (used in repo names)
 CUSTOMER_FULLNAME="Acme Corporation"          # Full display name for ArgoCD OIDC
 GITHUB_ORG="your-github-org"
-GITHUB_REPO="${CUSTOMER_SHORT_NAME}-nkp-gitops"
+GITHUB_REPO="${CUSTOMER_SHORT_NAME}-argocd-gitops"
 
 CUSTOMER_DOMAIN="acme.se"                     # Public/primary domain
 CUSTOMER_K8S_DOMAIN="k8s.acme.se"            # Kubernetes DNS zone
@@ -35,7 +35,7 @@ CUSTOMER_AD_KDC="dc01.ad.acme.se"           # AD Domain Controller / KDC
 CUSTOMER_LAB_DOMAIN="k8s.lab.acme.mgmt"     # Lab cluster domain (if applicable)
 
 AZURE_TENANT_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-AZURE_KEY_VAULT_NAME="kv-nkp-acme"
+AZURE_KEY_VAULT_NAME="kv-acme"
 
 NETSCALER_NSIP="10.x.x.x"                   # NetScaler management/nitro-api IP
 
@@ -86,10 +86,10 @@ echo "Done. Review git diff before committing."
 | Placeholder | Description | Example |
 |-------------|-------------|---------|
 | `<GITHUB_ORG>` | GitHub organization name | `<CUSTOMER_SHORT>-stad` |
-| `<GITHUB_REPO>` | GitHub repository name | `acme-nkp-gitops` |
+| `<GITHUB_REPO>` | GitHub repository name | `acme-argocd-gitops` |
 | `<CUSTOMER_FULLNAME>` | Display name used in ArgoCD OIDC | `Acme Corporation` |
 | `<AZURE_TENANT_ID>` | Azure AD Tenant UUID | `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` |
-| `<AZURE_KEY_VAULT_NAME>` | Azure Key Vault name | `kv-nkp-acme` |
+| `<AZURE_KEY_VAULT_NAME>` | Azure Key Vault name | `kv-acme` |
 | `<CUSTOMER_DOMAIN>` | Primary public domain | `acme.se` |
 | `<CUSTOMER_K8S_DOMAIN>` | Kubernetes DNS zone | `k8s.acme.se` |
 | `<CUSTOMER_AD_DOMAIN>` | Active Directory domain (FQDN) | `ad.acme.se` |
@@ -124,7 +124,7 @@ Before bootstrapping, create the following secrets in `<AZURE_KEY_VAULT_NAME>`:
 |-------------|-------------|
 | `kv-clientId` | Service principal client ID for ESO Azure auth |
 | `kv-clientSecret` | Service principal client secret for ESO Azure auth |
-| `argocd-sshKey-nkp-gitops` | SSH private key for GitOps repo access |
+| `argocd-sshKey-gitops` | SSH private key for GitOps repo access |
 | `argocd-oidc-clientId` | OIDC client ID (Azure AD App Registration) |
 | `argocd-oidc-clientSecret` | OIDC client secret |
 | `argocd-cluster-platform-prod01-token` | ArgoCD ServiceAccount token for prod cluster |

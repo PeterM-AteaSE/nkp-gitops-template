@@ -7,10 +7,10 @@ ALLOW_LIST=(
   "shared-test01"
   "local-test"
 )
-APP_NAME="ollama"
-HELM_CHART_VERSION="1.37.0"
-HELM_REPOSITORY="otwld/ollama"
-NAMESPACE="platform-ollama"
+APP_NAME="vllm"
+HELM_CHART_VERSION="0.1.10"
+HELM_REPOSITORY="vllm-production/vllm-stack"
+NAMESPACE="platform-vllm"
 
 init() {
   # shellcheck source=/dev/null
@@ -47,8 +47,7 @@ helm_template() {
     -f "values/values.yaml" >"$DEPLOYMENT_DIR/install/install.yaml"
 }
 
-yaml_template() { 
-  # Use ytt templating if needed
+yaml_template() {
   true
 }
 
@@ -61,16 +60,6 @@ post_validate() {
 }
 
 # Cluster-specific build customizations
-build_platform-test01() {
-  echo "Applying test-specific configurations for $APP_NAME"
-  true
-}
-
-build_platform-prod01() {
-  echo "Applying production-specific configurations for $APP_NAME"
-  true
-}
-
 build_shared-test01() {
   echo "Applying shared-test configurations for $APP_NAME"
   true
@@ -82,14 +71,9 @@ build_shared-prod01() {
 }
 
 build_local-test() {
-  echo "Applying local test configurations for $APP_NAME"
+  echo "Applying local-test configurations for $APP_NAME"
   true
 }
 
-main() {
-  init "$@"
-  is_allowed "${ALLOW_LIST[*]}" "$CLUSTER"
-  build
-}
-
-main "$@"
+init "$@"
+build

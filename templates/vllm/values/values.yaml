@@ -1,0 +1,65 @@
+# vLLM values
+# Helm chart: vllm-production/vllm-stack
+# Chart docs: https://artifacthub.io/packages/helm/vllm-production/vllm-stack
+
+# -- Number of replicas
+replicaCount: 1
+
+image:
+  repository: vllm/vllm-openai
+  pullPolicy: IfNotPresent
+  tag: ""
+
+# -- Model to serve. Replace with your desired HuggingFace model ID.
+# Examples:
+#   meta-llama/Llama-3.1-8B-Instruct
+#   mistralai/Mistral-7B-Instruct-v0.3
+#   microsoft/Phi-3-mini-4k-instruct
+model: "<MODEL_NAME>"
+
+# -- HuggingFace token (required for gated models like Llama)
+# Store in Azure Key Vault and inject via ExternalSecret
+huggingFaceToken: ""
+
+# GPU configuration
+gpu:
+  # -- Enable GPU (requires NVIDIA GPU operator)
+  enabled: true
+  # -- Number of GPUs
+  count: 1
+  # -- GPU resource name
+  resourceName: "nvidia.com/gpu"
+
+# -- vLLM engine arguments
+# See: https://docs.vllm.ai/en/latest/serving/engine_args.html
+extraArgs:
+  - --served-model-name
+  - "<MODEL_NAME>"
+  - --max-model-len
+  - "4096"
+
+service:
+  type: ClusterIP
+  port: 8000
+
+resources:
+  requests:
+    memory: "16Gi"
+    cpu: "4"
+  limits:
+    memory: "32Gi"
+    cpu: "8"
+
+persistence:
+  # -- Enable PVC for model cache (recommended)
+  enabled: true
+  size: 50Gi
+  storageClass: ""
+
+# -- Node selector for GPU nodes
+nodeSelector: {}
+#  nvidia.com/gpu.present: "true"
+
+tolerations: []
+
+affinity: {}

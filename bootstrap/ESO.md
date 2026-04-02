@@ -8,7 +8,7 @@ External Secrets Operator synchronizes secrets from Azure Key Vault to Kubernete
 
 1. **kubectl** configured with access to target cluster
 2. **Azure CLI** installed and authenticated (`az login`)
-3. **git <CUSTOMER_SHORT_UPPER>-NKP-Gitops** cloned locally and updated to latest version
+3. **git <CUSTOMER_SHORT_UPPER>-argocd-gitops** cloned locally and updated to latest version
 4. **Access to Azure Key Vault**: `<AZURE_KEY_VAULT_NAME>`
 
 ## Bootstrapping Process

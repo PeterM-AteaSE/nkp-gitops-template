@@ -1,21 +1,25 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform-prod01-argocd
+  name: #@ data.values.name + "-externaldns-internal"
   namespace: platform-argocd
   labels:
-    app: eso
+    app: "externaldns-internal"
 spec:
   destination:
-    name: platform-prod01
-    namespace: platform-eso
+    name: #@ data.values.name
+    namespace: platform-externaldns
   project: platform
   source:
     directory:
       jsonnet: {}
       recurse: true
-    path: deployments/platform-prod01/external-secrets-operator
+    path: #@ "deployments/" + data.values.name + "/externaldns-internal"
     repoURL: ssh://git@github.com:<GITHUB_ORG>/<GITHUB_REPO>.git
     targetRevision: HEAD
   syncPolicy:
     automated: {}
+    syncOptions:
+    - ServerSideApply=true

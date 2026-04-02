@@ -5,36 +5,17 @@ nameOverride: ""
 namespaceOverride: ""
 
 ollama:
-  # -- Automatically install Ollama Helm chart from https://otwld.github.io/ollama-helm/. Use [Helm Values](https://github.com/otwld/ollama-helm/#helm-values) to configure
-  # @section -- External Tools configuration
+  # -- Disable embedded Ollama — using vLLM via LiteLLM proxy instead
   enabled: false
-  # -- If enabling embedded Ollama, update fullnameOverride to your desired Ollama name value, or else it will use the default ollama.name value from the Ollama chart
-  # @section -- External Tools configuration
-  fullnameOverride: "open-webui-ollama"
-  # -- Example Ollama configuration with nvidia GPU enabled, automatically downloading a model, and deploying a PVC for model persistence
-  # ollama:
-  #   gpu:
-  #     enabled: true
-  #     type: 'nvidia'
-  #     number: 1
-  #   models:
-  #     pull:
-  #       - llama3
-  #     run:
-  #       - llama3
-  # runtimeClassName: nvidia
-  # persistentVolume:
-  #   enabled: true
-  #   volumeName: "example-pre-existing-pv-created-by-smb-csi"
 
-# -- A list of Ollama API endpoints. These can be added in lieu of automatically installing the Ollama Helm chart, or in addition to it.
-# @section -- External Tools configuration
-ollamaUrls:
-  - "http://ollama.ollama.svc:11434"
+# -- Disable Ollama URLs — using OpenAI-compatible endpoint from LiteLLM instead
+ollamaUrls: []
 
-# -- Disables taking Ollama Urls from `ollamaUrls`  list
-# @section -- External Tools configuration
+# -- Disables taking Ollama Urls from `ollamaUrls` list
 ollamaUrlsFromExtraEnv: false
+
+# -- OpenAI-compatible API endpoint (LiteLLM proxy)
+openaiBaseApiUrl: "http://litellm.platform-litellm.svc.cluster.local:4000/v1"
 
 pipelines:
   # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines

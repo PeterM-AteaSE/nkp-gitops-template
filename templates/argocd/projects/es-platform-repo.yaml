@@ -24,4 +24,7 @@ spec:
   data:
   - secretKey: sshKey
     remoteRef:
-      key: argocd-sshKey-nkp-gitops
+      conversionStrategy: Default
+      decodingStrategy: None
+      key: argocd-sshKey-gitops
+      metadataPolicy: None

@@ -66,7 +66,7 @@ ArgoCD requires three types of secrets to function:
 **Purpose:** Git repository access credentials  
 **Type:** ExternalSecret (synced from Azure Key Vault)  
 **Required in Key Vault:**
-- `argocd-sshKey-nkp-gitops` - SSH private key for GitHub access
+- `argocd-sshKey-gitops` - SSH private key for GitHub access
 
 **Creates Kubernetes Secret:**
 ```yaml

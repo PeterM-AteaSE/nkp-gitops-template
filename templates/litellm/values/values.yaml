@@ -1,0 +1,57 @@
+# LiteLLM values
+# Helm chart: litellm/litellm
+# Chart docs: https://artifacthub.io/packages/helm/litellm/litellm
+# Acts as an OpenAI-compatible proxy in front of vLLM
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/berriai/litellm
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 4000
+
+# -- LiteLLM proxy configuration
+# See: https://docs.litellm.ai/docs/proxy/configs
+proxy_config:
+  model_list:
+    - model_name: "<MODEL_NAME>"
+      litellm_params:
+        model: "openai/<MODEL_NAME>"
+        api_base: "http://vllm.platform-vllm.svc.cluster.local:8000/v1"
+        api_key: "dummy"
+
+  # -- General settings
+  general_settings:
+    master_key: "<LITELLM_MASTER_KEY>"    # Store in Azure Key Vault
+
+  # -- Router settings
+  router_settings:
+    routing_strategy: "simple-shuffle"
+
+# -- Environment variables (inject secrets via ExternalSecret)
+env: []
+# - name: LITELLM_MASTER_KEY
+#   valueFrom:
+#     secretKeyRef:
+#       name: litellm-secret
+#       key: masterKey
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "250m"
+  limits:
+    memory: "1Gi"
+    cpu: "1"
+
+# -- PostgreSQL for usage tracking (optional)
+postgresql:
+  enabled: false
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

@@ -1,6 +1,6 @@
-# <CUSTOMER_SHORT_UPPER> Nutanix Kubernetes Platform - GitOps
+# <CUSTOMER_SHORT_UPPER> ArgoCD GitOps Platform
 
-This repository manages the infrastructure and configuration for <CUSTOMER_SHORT_UPPER>'s Nutanix Kubernetes Platform (NKP) clusters using GitOps principles.
+This repository manages the infrastructure and configuration for <CUSTOMER_SHORT_UPPER>'s Kubernetes clusters using GitOps principles with ArgoCD.
 
 ## Overview
 
@@ -77,7 +77,7 @@ This script renames contexts from the default long names to shorter, more conven
 - `platform-test01-admin@platform-test01` → `platform-t01`
 - `shared-prod01-admin@shared-prod01` → `shared-p01`
 - `shared-test01-admin@shared-test01` → `shared-t01`
-- `management-admin@management` → `nkp-admin`
+- `management-admin@management` → `k8s-admin`
 
 After renaming, you can switch contexts more easily:
 
